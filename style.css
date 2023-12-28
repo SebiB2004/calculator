@@ -1,10 +1,51 @@
-#calculator{
+#taste{
     width: 300px;
-    border: 1px solid black;
     border-radius: 4px;
     display:flex;
     flex-wrap:wrap;
     gap:0;
+    background-color: lightgreen;
+}
+#taste div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#taste div:hover{
+    background-color: #2980b9;
+    border: 10px solid #2980b9;
+    cursor: pointer;
+}
+#ecran{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    flex-wrap:wrap;
+    width: 300px;
+    height:100px;
+    background-color:#2980b9;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#ecran div{
+    font-size: 60px;
+    margin:10px;
+}
+#adunare{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+#calculator{
+    height:400px;
+    width:300px;
+    border: 2px solid black;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 
