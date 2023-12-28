@@ -57,7 +57,7 @@ for(let i = 0; i < 4; i++){
 
     buton.addEventListener("click", function(){
       //5 + 7 
-  
+          console.log('click');
         if(numar < 10000000 && !isNaN(parseInt(buton.textContent))){
             numar = numar * 10 + parseInt(buton.textContent);
             ecran.textContent = numar;
