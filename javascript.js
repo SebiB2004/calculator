@@ -68,6 +68,7 @@ for(let i = 0; i < 4; i++){
                 semn = buton.textContent;
             } else if(isNaN(buton.textContent) && buton.textContent !== "="){
                 semn = buton.textContent;
+                console.log('update semn');
                 getResult();
             }
             if(buton.textContent === "<="){
@@ -75,6 +76,7 @@ for(let i = 0; i < 4; i++){
             }
 
             if(buton.textContent === "="){
+                console.log('= ');
                 getResult();
             }
         
