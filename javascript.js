@@ -69,40 +69,14 @@ for(let i = 0; i < 4; i++){
             semn = buton.textContent;
         } else if(isNaN(buton.textContent) && buton.textContent !== "="){
             semn = buton.textContent;
+            getResult();
         }
         if(buton.textContent === "<="){
             ecran.textContent = Math.floor(parseInt(ecran.textContent) / 10);
         }
 
         if(buton.textContent === "="){
-            termen2 = numar;
-            console.log(termen1);
-            console.log(termen2);
-            switch(semn){
-                case "+":
-                    calcul = suma(termen1,termen2);
-                    break;
-                case "-":
-                    calcul = diferenta(termen1, termen2);
-                    break;
-                case "*":
-                    calcul = inmultire(termen1,termen2);
-                    break;
-                case "/":
-                    calcul = impartire(termen1,termen2);
-                    break;
-                case "%":
-                    calcul = rest(termen1,termen2);
-                    break;
-            }
-            console.log(calcul);
-             if(calcul !== Math.floor(calcul)){
-            ecran.textContent = calcul.toFixed(2);
-             } else {
-                ecran.textContent = calcul;
-             } 
-            termen1 = calcul;
-            numar = 0;
+            getResult();
         }
        
         div2.appendChild(ecran);      
@@ -116,6 +90,39 @@ for(let i = 0; i < 4; i++){
     
 }
 
+function getResult() {
+    if ( isNaN(calcul)) {
+        return;
+    }
+    termen2 = numar;
+    console.log(termen1);
+    console.log(termen2);
+    switch(semn){
+        case "+":
+            calcul = suma(termen1,termen2);
+            break;
+        case "-":
+            calcul = diferenta(termen1, termen2);
+            break;
+        case "*":
+            calcul = inmultire(termen1,termen2);
+            break;
+        case "/":
+            calcul = impartire(termen1,termen2);
+            break;
+        case "%":
+            calcul = rest(termen1,termen2);
+            break;
+    }
+    console.log(calcul);
+     if(calcul !== Math.floor(calcul)){
+    ecran.textContent = calcul.toFixed(2);
+     } else {
+        ecran.textContent = calcul;
+     } 
+    termen1 = calcul;
+    numar = 0;
+}
 
 function suma(a,b){
     return a + b;
@@ -132,3 +139,4 @@ function impartire(a,b){
 function rest(a,b){
     return a % b;
 }
+
