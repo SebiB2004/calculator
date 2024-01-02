@@ -6,129 +6,145 @@ let numar = 0;
 let semn = "";
 let calcul = undefined;
 let contor_operatii = 0;
-let termen1;
-let termen2;
-let ok;
+let termeni = [];
+let ok = 1;
+let i = 0;
 ecran.textContent = 0;
+let termen;
+let rezultat = "";
 
-for(let i = 0; i < 4; i++){
-    for(let j = 0; j < 4; j++){
-    const buton = document.createElement("div");
-    buton.style.boxSizing = "border-box";
-    buton.style.border = "1px solid black";
-    buton.style.height = "75px";
-    buton.style.width= "75px";
-    if(j == 3 && i == 0){
-        buton.textContent = "+";
-        buton.style.backgroundColor = "orange";
-    } else if( j == 3 && i == 1){
-        buton.textContent = "-";
-        buton.style.backgroundColor = "orange";
-    } else if(j == 3 && i == 2){
-        buton.textContent = "/";
-        buton.style.backgroundColor = "orange";
-    } else if( j == 3 && i == 3){
-        buton.textContent = "*";
-        buton.style.backgroundColor = "orange";
-        buton.style.borderBottomRightRadius = "4px";
-        buton.style.borderBottomLeftRadius = "0";
-    }else if(j == 0 && i == 3){
-        buton.textContent = "0";
-        buton.style.borderBottomRightRadius = "0";
-        buton.style.borderBottomLeftRadius = "4px";
-    } else if(j == 1 && i == 3){
-        buton.textContent = "<=";
-        buton.style.backgroundColor = "orange";
-    }
-    else if(j == 2 && i == 3){
-        buton.textContent = "=";
-        buton.style.backgroundColor = "orange";
-    }
-    else {
-        buton.textContent = number;
-        number++;
-    }
+for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+        const buton = document.createElement("div");
+        buton.style.boxSizing = "border-box";
+        buton.style.border = "1px solid black";
+        buton.style.height = "75px";
+        buton.style.width = "75px";
 
-    buton.style.fontSize = "60px";
-    div.appendChild(buton);
-   
-    div2.appendChild(ecran);
-
-
-    buton.addEventListener("click", function(){
-      //5 + 7 
-  
-        if(numar < 10000000 && !isNaN(parseInt(buton.textContent))){
-            numar = numar * 10 + parseInt(buton.textContent);
-            ecran.textContent = numar;
-           }
-
-        if(isNaN(buton.textContent) && buton.textContent !== "=" && isNaN(calcul)){
-            termen1 = numar;
-            numar = 0;
-            semn = buton.textContent;
-        } else if(isNaN(buton.textContent) && buton.textContent !== "="){
-            semn = buton.textContent;
-        }
-        if(buton.textContent === "<="){
-            ecran.textContent = Math.floor(parseInt(ecran.textContent) / 10);
+        if (j == 3 && i == 0) {
+            buton.textContent = "+";
+            buton.style.backgroundColor = "orange";
+        } else if (j == 3 && i == 1) {
+            buton.textContent = "-";
+            buton.style.backgroundColor = "orange";
+        } else if (j == 3 && i == 2) {
+            buton.textContent = "/";
+            buton.style.backgroundColor = "orange";
+        } else if (j == 3 && i == 3) {
+            buton.textContent = "*";
+            buton.style.backgroundColor = "orange";
+            buton.style.borderBottomRightRadius = "4px";
+            buton.style.borderBottomLeftRadius = "0";
+        } else if (j == 0 && i == 3) {
+            buton.textContent = "0";
+            buton.style.borderBottomRightRadius = "0";
+            buton.style.borderBottomLeftRadius = "4px";
+        } else if (j == 1 && i == 3) {
+            buton.textContent = "<=";
+            buton.style.backgroundColor = "orange";
+        } else if (j == 2 && i == 3) {
+            buton.textContent = "=";
+            buton.style.backgroundColor = "orange";
+        } else {
+            buton.textContent = number;
+            number++;
         }
 
-        if(buton.textContent === "="){
-            termen2 = numar;
-            console.log(termen1);
-            console.log(termen2);
-            switch(semn){
-                case "+":
-                    calcul = suma(termen1,termen2);
-                    break;
-                case "-":
-                    calcul = diferenta(termen1, termen2);
-                    break;
-                case "*":
-                    calcul = inmultire(termen1,termen2);
-                    break;
-                case "/":
-                    calcul = impartire(termen1,termen2);
-                    break;
-                case "%":
-                    calcul = rest(termen1,termen2);
-                    break;
+        buton.style.fontSize = "60px";
+        div.appendChild(buton);
+
+        div2.appendChild(ecran);
+
+        buton.addEventListener("click", function () {
+            if (numar < 10000000 && !isNaN(parseInt(buton.textContent))) {
+                numar = numar * 10 + parseInt(buton.textContent);
+                ecran.textContent = numar;
             }
-            console.log(calcul);
-             if(calcul !== Math.floor(calcul)){
-            ecran.textContent = calcul.toFixed(2);
-             } else {
-                ecran.textContent = calcul;
-             } 
-            termen1 = calcul;
-            numar = 0;
+
+            if (isNaN(buton.textContent) && buton.textContent !== "=" && buton.textContent !== "<=") {
+                termeni.push(numar);
+                termeni.push(buton.textContent);
+                numar = 0;
+            }
+            
+            if (buton.textContent === "<=") {
+                location.reload();
+               
+            }
+
+            if (buton.textContent === "=") {
+                termeni.push(numar);
+                rezultat = termeni[0];
+                for(let i = 1; i <= termeni.length && ok == 1; i+=2){
+                   semn = termeni[i];
+                   termen = termeni[i+1];
+                   if(i % 2 == 0 && isNaN(termeni[i])){
+                     ok = -1;
+                     console.log(ok);
+                   }
+                switch (semn) {
+                    case "+":
+                      rezultat = suma(rezultat,termen);
+                        break;
+                    case "-":
+                        rezultat = diferenta(rezultat,termen);
+                        break;
+                    case "*":
+                        rezultat = inmultire(rezultat,termen);
+                        break;
+                    case "/":
+                        if(termen == 0){
+                            ok = -1;
+                        } else {
+                        rezultat = impartire(rezultat,termen);
+                        }
+                        break;
+                    case "%":
+                        rezultat = rest(rezultat,termen);
+                        break;
+                }
+            }
+        if(ok != -1){
+            if(rezultat < 100000000 && rezultat > -100000000){
+
+                    if (rezultat !== Math.floor(rezultat)) {
+                    ecran.textContent = rezultat.toFixed(2);
+                    } else {
+                    ecran.textContent = rezultat;
+                    }
+
+                numar = 0;
+                semn = "";
+
+            } else 
+                ecran.textContent = "Error";
+
+            } else {
+                ecran.textContent = "ERROR";
+                ok = 1;
+            }
+        termeni = [rezultat, buton.textContent]; // primele doua pozitii din noul vector sunt rezultatul si semnul pentru a evita ca la viitorul loop termenul sa fie chiar semnul: 
+                                                   // [rezultat,semn,rezultat,semn ...]
         }
-       
-        div2.appendChild(ecran);      
+        
 
-    })
-
-
-
-} 
-
-    
+            div2.appendChild(ecran);
+        });
+    }
 }
 
-
-function suma(a,b){
+function suma(a, b) {
     return a + b;
 }
-function diferenta(a,b){
+function diferenta(a, b) {
     return a - b;
 }
-function inmultire(a,b){
+function inmultire(a, b) {
     return a * b;
 }
-function impartire(a,b){
+function impartire(a, b) {
     return a / b;
 }
-function rest(a,b){
+function rest(a, b) {
     return a % b;
 }
